@@ -24,14 +24,15 @@ public class Controller {
         this.player = Game.PLAYER1;
     }
     public void newGame(){
-        game.resetBoard();
+        
         board.resetView();
+        game.resetBoard();
         this.player = Game.PLAYER1;
         initGame(!game.aiStart);
     }
     public void initGame(boolean start){
         game.aiStart = start;
-        if(game.aiStart()){
+        if(game.aiStart){
             aiMoves();
         }
     }

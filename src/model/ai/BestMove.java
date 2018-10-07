@@ -7,14 +7,14 @@ package model.ai;
  */
 public class BestMove {
     public int value;
-	public int index;
+    public int index;
 
-	public BestMove (int value, int index){
-		this.value = value;
-		this.index = index;
-	}
-	public BestMove (int value) {
-	    this.value = value;
-	    this.index = 0;
-	}
+    public BestMove (int value, int index){
+        this.value = value;
+        this.index = index;
+    }
+    public BestMove (int value) {
+        this.value = value;
+        this.index = 0;
+    }
 }

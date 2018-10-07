@@ -26,12 +26,11 @@ public class Game {
     private int numPlayed;
 	
     public Game() {
-        data = new String[9];
-//        aiStart = whoStarts;
+        this.data = new String[9];
         resetBoard();
     }
     public String getWinner(){
-        return winner;
+        return this.winner;
     }
 //    public static boolean winnerFound(String id, String[] data){
     public boolean winnerFound(String id){
@@ -50,11 +49,8 @@ public class Game {
         for (int i = 0; i < 9; i++) if (data[i].equals(EMPTY)) return false;
         return true;
     }
-    public boolean aiStart(){
-        return aiStart;
-    }
     
-    //State Query used by View or Controller
+    //State Query used by ai classes
     public String[] requestBoard(){
         return data;
     }
@@ -96,7 +92,7 @@ public class Game {
         }
         return "illegal move";
     }
-
+    
     public final void resetBoard() {
         gameOver = false;
 //        numPlayed = 0;
@@ -104,6 +100,5 @@ public class Game {
             data[x] = EMPTY;
         }
         winner = "none";
-        
     }
 }

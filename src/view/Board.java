@@ -23,11 +23,9 @@ public class Board extends JFrame implements ActionListener {
     private ImageIcon player2Icon = new ImageIcon("images/naught.gif");
     private ImageIcon curIcon;
 
-    private Game game;
     private Controller controller;
 
-    public Board(Game game) {
-        this.game = game;
+    public Board(){
         initialize();
     }
 
@@ -72,9 +70,7 @@ public class Board extends JFrame implements ActionListener {
         buttons[x].setIcon(curIcon);
     }
     public void displayMessage(String message){
-//        messageLabel.setText(message);
         int answer = JOptionPane.showConfirmDialog(null, message + "\nPlay again?", "Results", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		
 	if(answer == JOptionPane.YES_OPTION)controller.newGame(); else System.exit(0);
     }
 

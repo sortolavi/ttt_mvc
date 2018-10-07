@@ -38,13 +38,14 @@ public class Minimax {
     public BestMove bMove(Game game, String player) {
         this.game = game;
         String[] textBoard = game.requestBoard();
-//        System.out.println(Arrays.asList(textBoard));
 
         BestMove move;
         int best = 0;
         int eval = evaluatePosition(); 
-//        int eval = evaluatePosition(textBoard); 
-        if (eval != GOAHEAD) return new BestMove(eval);  // if can't continue then start to unwind recursion
+ 
+        if (eval != GOAHEAD){
+            return new BestMove(eval); // if can't continue then start to unwind recursion
+        }
 
         String opponent = (player.equals(Game.PLAYER1))? Game.PLAYER2 : Game.PLAYER1;
 
@@ -52,7 +53,7 @@ public class Minimax {
 
         for (int i = 0; i < 9; i++){
             if (textBoard[i].equals(Game.EMPTY)){
-
+                
                 game.virtualSet(player, i);		// make a move
                 move = bMove(game, opponent);		// opponent move, going on recurcively until solution is reached
                 game.virtualSet(player, i);		// cancel the move
@@ -61,11 +62,10 @@ public class Minimax {
                 if (player == Game.PLAYER2 && move.value > value || player == Game.PLAYER1 && move.value < value) {
                         value = move.value;
                         best = i;
+                        
                 }
             }
         }
-
-//        System.out.println("value : " + value + ", best : " + best);
         return new BestMove (value, best); 
 
     }
