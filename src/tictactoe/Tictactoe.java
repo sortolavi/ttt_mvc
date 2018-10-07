@@ -20,8 +20,7 @@ public class Tictactoe {
         boolean aiStart = (whoStarts == JOptionPane.YES_OPTION)? true : false;
         
         Game game = new Game();
-        Board board = new Board();
-        game.registerViewObserver(board);	
+        Board board = new Board();	
 
         Controller controller = new Controller(board, game);
         board.addEventListener(controller);

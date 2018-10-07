@@ -19,7 +19,7 @@ public class Game {
     };
     
     private final String[] data;
-    private Board board;
+
     public boolean aiStart;
     private String winner;
     private boolean gameOver;
@@ -55,9 +55,6 @@ public class Game {
         return data;
     }
 
-    public void registerViewObserver(Board board) {
-        this.board = board;
-    }
 
     // Testing model change but not changing view
     public void virtualSet(String player, int x){
