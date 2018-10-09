@@ -2,6 +2,7 @@ package tictactoe;
 
 import model.Game;
 import view.Board;
+import model.ai.*;
 import controller.Controller;
 
 import javax.swing.*;
@@ -20,9 +21,11 @@ public class Tictactoe {
         boolean aiStart = (whoStarts == JOptionPane.YES_OPTION)? true : false;
         
         Game game = new Game();
-        Board board = new Board();	
+        Board board = new Board();
+        Ai ai = new Minimax();
+//        Ai ai = new Casual();
 
-        Controller controller = new Controller(board, game);
+        Controller controller = new Controller(board, game, ai);
         board.addEventListener(controller);
         
         controller.initGame(aiStart);

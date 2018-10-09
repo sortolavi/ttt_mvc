@@ -6,13 +6,13 @@ import model.ai.*;
  *
  * @author Timo Sorakivi <timo.sorakivi@gmail.com>
  */
-public class Minimax {
+public class Minimax implements Ai {
     private Game game;
 
     // constant evaluatePosition function return values
     private static final int PLAYER1WIN = 4; // smallest value
     private static final int PLAYER2WIN = 7; // biggest value
-    private static final int DRAW 	= 5; // draw 
+    private static final int TIE 	= 5; // tie
     private static final int GOAHEAD	= 6; // continue
     
     public Minimax(){
@@ -21,12 +21,12 @@ public class Minimax {
     
     /**
      * Function to evaluate current move
-     * @return integer representing win, draw or continue
+     * @return integer representing win, TIE or continue
      */
     private int evaluatePosition () {
         return game.winnerFound (Game.PLAYER2)? PLAYER2WIN :
                game.winnerFound (Game.PLAYER1)? PLAYER1WIN :
-               game.tableFull()                  ? DRAW       : GOAHEAD; 
+               game.tableFull()               ? TIE        : GOAHEAD; 
     }
 
     /**

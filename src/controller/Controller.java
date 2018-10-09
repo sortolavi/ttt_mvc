@@ -12,25 +12,21 @@ import model.ai.*;
 public class Controller {
     private Board board;
     private Game game;
-    private Minimax ai;
-//    private Casual ai;
+    private Ai ai;
     private String player;
 
-    public Controller(Board board, Game game) {
+    public Controller(Board board, Game game, Ai ai) {
         this.board = board;
         this.game = game;
-        this.ai = new Minimax();
-//        this.ai = new Casual();
-        this.player = Game.PLAYER1;
+        this.ai = ai;
     }
     public void newGame(){
-        
         board.resetView();
         game.resetBoard();
-        this.player = Game.PLAYER1;
         initGame(!game.aiStart);
     }
     public void initGame(boolean start){
+        this.player = Game.PLAYER1;
         game.aiStart = start;
         if(game.aiStart){
             aiMoves();
@@ -53,22 +49,18 @@ public class Controller {
         int x = Integer.valueOf(buttonName);
         
         // set player's move to model
-        String statusMsg = game.set(player, x);
+        if(!game.set(player, x)){
+            return;
+        }
         
+        // update board graphics
         board.notifyChanges(player, x);
         
-        if(statusMsg.equals("game over")) {
-            board.displayMessage(statusMsg);
-            return;
-        }
-        else if(statusMsg.equals("illegal move")){
-            return;
-        }
-
+        // stop game if winner found
         if(checkForWinner()) {
             return;
         }
-        // let AI make its move
+        // otherwise let AI make its move
         changeTurn();
         aiMoves();
         checkForWinner();
@@ -89,7 +81,7 @@ public class Controller {
             board.displayMessage("Player 2 won");
             break;
         default:
-            board.displayMessage("Draw");			
+            board.displayMessage("Tie");			
             break;		
         }
         

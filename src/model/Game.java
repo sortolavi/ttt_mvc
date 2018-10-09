@@ -22,7 +22,6 @@ public class Game {
 
     public boolean aiStart;
     private String winner;
-    private boolean gameOver;
     private int numPlayed;
 	
     public Game() {
@@ -64,12 +63,8 @@ public class Game {
         else data[x] = EMPTY;
     }
 
-    //Controller Changes Model State
-    public String set(String player, int x) {
-        
-        if(gameOver) {
-            return "game over";
-        }
+    // Controller Changes Model State
+    public boolean set(String player, int x) {
         
         if(data[x].equals(EMPTY)) {
             data[x] = player;
@@ -77,21 +72,18 @@ public class Game {
             
             if(winnerFound(player)){
                 this.winner = player;
-                gameOver = true;
             }
             else if(tableFull()) {
-                this.winner = "Draw";
-                gameOver = true;
+                this.winner = "Tie";
             }
 
-            return "model updated";
+            return true;
             
         }
-        return "illegal move";
+        return false;
     }
     
     public final void resetBoard() {
-        gameOver = false;
 //        numPlayed = 0;
         for(int x= 0; x<9; x++) {
             data[x] = EMPTY;
