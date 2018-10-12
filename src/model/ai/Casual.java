@@ -10,7 +10,7 @@ import java.util.*;
 public class Casual implements Ai {
     public BestMove bMove(Game game, String player) {
 
-        String[] textBoard = game.requestBoard();
+        String[] textBoard = game.requestData();
         ArrayList<Integer> arrList = new ArrayList<>();
 
         for(int i = 0; i < 9; i++) {

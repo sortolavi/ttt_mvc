@@ -1,6 +1,7 @@
 
 package controller;
 
+import java.util.Arrays;
 import view.Board;
 import model.Game;
 import model.ai.*;
@@ -14,77 +15,71 @@ public class Controller {
     private Game game;
     private Ai ai;
     private String player;
+    private boolean aiStart;
 
     public Controller(Board board, Game game, Ai ai) {
         this.board = board;
         this.game = game;
         this.ai = ai;
     }
+    
     public void newGame(){
         board.resetView();
-        game.resetBoard();
-        initGame(!game.aiStart);
+        game.resetData();
+        initGame(!aiStart);
     }
+    
     public void initGame(boolean start){
-        this.player = Game.PLAYER1;
-        game.aiStart = start;
-        if(game.aiStart){
-            aiMoves();
+        player = Game.PLAYER1;
+        aiStart = start;
+        if(aiStart){
+            aiMakeMove();
         }
     }
+    
     public void changeTurn(){
-        this.player = this.player.equals(Game.PLAYER1)? Game.PLAYER2 : Game.PLAYER1;
+        player = player.equals(Game.PLAYER1)? Game.PLAYER2 : Game.PLAYER1;
     }
 
-    public void aiMoves(){
+    public void aiMakeMove(){
         BestMove aiMove = ai.bMove(game, player);
         if(aiMove != null) {
-            game.set(player, aiMove.index);
-            board.notifyChanges(player, aiMove.index);
-            changeTurn();
+            move(aiMove.index);
         }
     }
+    
+    public void move(int index){
+        game.set(player, index);
+        board.notifyChanges(player, index);
+        changeTurn();
+    }
+
     public void notifyButtonPressed(String buttonName) {
 
         int x = Integer.valueOf(buttonName);
+        move(x);
+        if(checkForWinner())return;
         
-        // set player's move to model
-        if(!game.set(player, x)){
-            return;
-        }
-        
-        // update board graphics
-        board.notifyChanges(player, x);
-        
-        // stop game if winner found
-        if(checkForWinner()) {
-            return;
-        }
-        // otherwise let AI make its move
-        changeTurn();
-        aiMoves();
+        aiMakeMove();
         checkForWinner();
-
     }
     
     private boolean checkForWinner(){
         String winner = game.getWinner();
-        if(winner.equals("none")) {
+        if(winner == null) {
             return false;
         }
-
+        
         switch (winner) {		
-        case Game.PLAYER1:
-            board.displayMessage("Player 1 won");
-            break;			
+        case Game.PLAYER1:			
         case Game.PLAYER2:
-            board.displayMessage("Player 2 won");
+            board.showWinningRow(game.requestWinningRow());
+            board.displayMessage("Player " + winner + " won");
             break;
         default:
-            board.displayMessage("Tie");			
+            board.displayMessage(winner);			
             break;		
         }
-        
         return true;
     }
 }

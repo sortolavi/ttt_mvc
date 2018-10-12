@@ -7,6 +7,7 @@ import controller.Controller;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.*;
 /**
  *
@@ -35,7 +36,6 @@ public class Board extends JFrame implements ActionListener {
             buttons[i].setIcon(null);
             buttons[i].setBackground(Color.white);
             buttons[i].setEnabled(true);
-
         }
     }
     public void initialize() {
@@ -55,19 +55,25 @@ public class Board extends JFrame implements ActionListener {
             this.add(buttons[i]);
         }
         this.setVisible(true);
-
         this.setTitle("Tic-Tac-Toe");
     }
 
     public void notifyChanges(String player, int x) {
         curIcon = player.equals(Game.PLAYER1)? player1Icon : player2Icon;
-//        buttons[x].setText(player);
         buttons[x].setEnabled(false);
         buttons[x].setIcon(curIcon);
     }
+    
     public void displayMessage(String message){
-        int answer = JOptionPane.showConfirmDialog(null, message + "\nPlay again?", "Results", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int answer = JOptionPane.showConfirmDialog(null, message + "!\nPlay again?", "Results", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 	if(answer == JOptionPane.YES_OPTION)controller.newGame(); else System.exit(0);
+    }
+    
+    public void showWinningRow(int[] row) {
+        for(int i = 0; i < 3; i++){
+            int k = row[i];
+            buttons[k].setBackground(new Color(20, 20, 20));
+        }
     }
 
     @Override
@@ -76,6 +82,5 @@ public class Board extends JFrame implements ActionListener {
         String buttonName = pressed.getName();
 
         controller.notifyButtonPressed(buttonName);
-
     }
 }

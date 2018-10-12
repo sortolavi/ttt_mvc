@@ -1,6 +1,7 @@
 
 package model;
 
+import java.util.Arrays;
 import view.Board;
 /**
  *
@@ -17,16 +18,16 @@ public class Game {
         {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // vertical rows
         {0, 4, 8}, {2, 4, 6}             // diagonal rows
     };
-    
-    private final String[] data;
 
-    public boolean aiStart;
+    private final String[] data;
+    private final int[] winningRow;
     private String winner;
     private int numPlayed;
 	
     public Game() {
         this.data = new String[9];
-        resetBoard();
+        this.winningRow = new int[3];
+        resetData();
     }
     public String getWinner(){
         return this.winner;
@@ -37,6 +38,13 @@ public class Game {
             if(data[WINNINGCOMBINATIONS[i][0]] == id &&  
                data[WINNINGCOMBINATIONS[i][1]] == id && 
                data[WINNINGCOMBINATIONS[i][2]] == id) { 
+                    
+                    for(int j = 0; j < 3; j++) {
+                        int k = WINNINGCOMBINATIONS[i][j];
+//                        buttons[k].setBackground(new Color(20, 20, 20));
+                        winningRow[j]=k;
+                    }
+                    
                     return true;
             }
         }
@@ -50,10 +58,12 @@ public class Game {
     }
     
     //State Query used by ai classes
-    public String[] requestBoard(){
+    public String[] requestData(){
         return data;
     }
-
+    public int[] requestWinningRow(){
+        return winningRow;
+    }
 
     // Testing model change but not changing view
     public void virtualSet(String player, int x){
@@ -64,7 +74,7 @@ public class Game {
     }
 
     // Controller Changes Model State
-    public boolean set(String player, int x) {
+    public void set(String player, int x) {
         
         if(data[x].equals(EMPTY)) {
             data[x] = player;
@@ -76,18 +86,14 @@ public class Game {
             else if(tableFull()) {
                 this.winner = "Tie";
             }
-
-            return true;
-            
         }
-        return false;
     }
     
-    public final void resetBoard() {
-//        numPlayed = 0;
+    public final void resetData() {
+        numPlayed = 0;
         for(int x= 0; x<9; x++) {
             data[x] = EMPTY;
         }
-        winner = "none";
+        winner = null;
     }
 }
