@@ -22,10 +22,10 @@ public class Tictactoe {
         
         Game game = new Game();
         Board board = new Board();
-        Ai ai = new Minimax();
-//        Ai ai = new Casual();
+        MoveStrategy ms = new Minimax();
+//        MoveStrategy ms = new Casual();
 
-        Controller controller = new Controller(board, game, ai);
+        Controller controller = new Controller(board, game, ms);
         board.addEventListener(controller);
         
         controller.initGame(aiStart);

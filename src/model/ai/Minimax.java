@@ -6,7 +6,7 @@ import model.ai.*;
  *
  * @author Timo Sorakivi <timo.sorakivi@gmail.com>
  */
-public class Minimax implements Ai {
+public class Minimax implements MoveStrategy {
     private Game game;
 
     // constant evaluatePosition function return values

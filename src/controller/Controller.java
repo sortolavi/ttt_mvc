@@ -13,14 +13,14 @@ import model.ai.*;
 public class Controller {
     private Board board;
     private Game game;
-    private Ai ai;
+    private MoveStrategy ms;
     private String player;
     private boolean aiStart;
 
-    public Controller(Board board, Game game, Ai ai) {
+    public Controller(Board board, Game game, MoveStrategy ms) {
         this.board = board;
         this.game = game;
-        this.ai = ai;
+        this.ms = ms;
     }
     
     public void newGame(){
@@ -42,7 +42,7 @@ public class Controller {
     }
 
     public void aiMakeMove(){
-        BestMove aiMove = ai.bMove(game, player);
+        BestMove aiMove = ms.bMove(game, player);
         if(aiMove != null) {
             move(aiMove.index);
         }

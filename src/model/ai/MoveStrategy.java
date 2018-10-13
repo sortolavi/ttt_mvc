@@ -7,7 +7,7 @@ import model.Game;
  * 
  * @author Timo Sorakivi <timo.sorakivi@gmail.com>
  */
-public interface Ai {
+public interface MoveStrategy {
     
     public BestMove bMove(Game game, String player);
     

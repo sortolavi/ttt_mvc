@@ -7,7 +7,7 @@ import java.util.*;
  *  Dumb AI chooses randomly from available free slots
  * @author Timo Sorakivi <timo.sorakivi@gmail.com>
  */
-public class Casual implements Ai {
+public class Casual implements MoveStrategy {
     public BestMove bMove(Game game, String player) {
 
         String[] textBoard = game.requestData();
