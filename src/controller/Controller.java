@@ -15,7 +15,7 @@ public class Controller {
     private Game game;
     private MoveStrategy ms;
     private String player;
-    private boolean aiStart;
+    private boolean oppStart;
 
     public Controller(Board board, Game game, MoveStrategy ms) {
         this.board = board;
@@ -26,14 +26,14 @@ public class Controller {
     public void newGame(){
         board.resetView();
         game.resetData();
-        initGame(!aiStart);
+        initGame(!oppStart);
     }
     
     public void initGame(boolean start){
         player = Game.PLAYER1;
-        aiStart = start;
-        if(aiStart){
-            aiMakeMove();
+        oppStart = start;
+        if(oppStart){
+            oppMakeMove();
         }
     }
     
@@ -41,10 +41,10 @@ public class Controller {
         player = player.equals(Game.PLAYER1)? Game.PLAYER2 : Game.PLAYER1;
     }
 
-    public void aiMakeMove(){
-        BestMove aiMove = ms.bMove(game, player);
-        if(aiMove != null) {
-            move(aiMove.index);
+    public void oppMakeMove(){
+        BestMove oppMove = ms.bMove(game, player);
+        if(oppMove != null) {
+            move(oppMove.index);
         }
     }
     
@@ -60,7 +60,7 @@ public class Controller {
         move(x);
         if(checkForWinner())return;
         
-        aiMakeMove();
+        oppMakeMove();
         checkForWinner();
     }
     

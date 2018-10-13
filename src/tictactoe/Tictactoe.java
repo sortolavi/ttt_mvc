@@ -17,8 +17,8 @@ public class Tictactoe {
      */
     public static void main(String[] args) {
         
-        int whoStarts = JOptionPane.showConfirmDialog(null, "AI moves first?", "Start the game",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        boolean aiStart = (whoStarts == JOptionPane.YES_OPTION)? true : false;
+        int whoStarts = JOptionPane.showConfirmDialog(null, "Opponent moves first?", "Start the game",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        boolean oppStart = (whoStarts == JOptionPane.YES_OPTION)? true : false;
         
         Game game = new Game();
         Board board = new Board();
@@ -28,7 +28,7 @@ public class Tictactoe {
         Controller controller = new Controller(board, game, ms);
         board.addEventListener(controller);
         
-        controller.initGame(aiStart);
+        controller.initGame(oppStart);
     }
     
 }

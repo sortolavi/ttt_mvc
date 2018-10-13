@@ -8,6 +8,7 @@ import java.util.*;
  * @author Timo Sorakivi <timo.sorakivi@gmail.com>
  */
 public class Casual implements MoveStrategy {
+    
     public BestMove bMove(Game game, String player) {
 
         String[] textBoard = game.requestData();

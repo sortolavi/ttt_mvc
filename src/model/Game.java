@@ -41,7 +41,6 @@ public class Game {
                     
                     for(int j = 0; j < 3; j++) {
                         int k = WINNINGCOMBINATIONS[i][j];
-//                        buttons[k].setBackground(new Color(20, 20, 20));
                         winningRow[j]=k;
                     }
                     
