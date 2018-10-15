@@ -10,14 +10,14 @@ import model.ai.*;
  *
  * @author Timo Sorakivi <timo.sorakivi@gmail.com>
  */
-public class Controller {
+public class Broker {
     private Board board;
     private Game game;
     private MoveStrategy ms;
     private String player;
     private boolean oppStart;
 
-    public Controller(Board board, Game game, MoveStrategy ms) {
+    public Broker(Board board, Game game, MoveStrategy ms) {
         this.board = board;
         this.game = game;
         this.ms = ms;

@@ -3,7 +3,7 @@ package tictactoe;
 import model.Game;
 import view.Board;
 import model.ai.*;
-import controller.Controller;
+import controller.Broker;
 import java.util.Arrays;
 
 import javax.swing.*;
@@ -32,10 +32,10 @@ public class Tictactoe {
             }
         }
 
-        Controller controller = new Controller(board, game, ms);
-        board.addEventListener(controller);
+        Broker broker = new Broker(board, game, ms);
+        board.addEventListener(broker);
         
-        controller.initGame(oppStart);
+        broker.initGame(oppStart);
     }
     
 }

@@ -56,7 +56,7 @@ public class Game {
         return true;
     }
     
-    //State Query used by ai classes
+    // Model Status Query 
     public String[] requestData(){
         return data;
     }
@@ -64,7 +64,7 @@ public class Game {
         return winningRow;
     }
 
-    // Testing model change but not changing view
+    // Change model without changing view
     public void virtualSet(String player, int x){
         if(data[x].equals(EMPTY)) {
             data[x] = player;
@@ -72,7 +72,7 @@ public class Game {
         else data[x] = EMPTY;
     }
 
-    // Controller Changes Model State
+    // Change Model State
     public void set(String player, int x) {
         
         if(data[x].equals(EMPTY)) {

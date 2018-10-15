@@ -2,7 +2,7 @@
 package view;
 
 import model.Game;
-import controller.Controller;
+import controller.Broker;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,14 +19,14 @@ public class Board extends JFrame implements ActionListener {
     private ImageIcon player2Icon = new ImageIcon("images/naught.gif");
     private ImageIcon curIcon;
 
-    private Controller controller;
+    private Broker broker;
 
     public Board(){
         initialize();
     }
 
-    public void addEventListener(Controller controller) {
-        this.controller = controller;
+    public void addEventListener(Broker broker) {
+        this.broker = broker;
     }
     public void resetView(){
         for(int i= 0; i<9; i++) {
@@ -65,7 +65,7 @@ public class Board extends JFrame implements ActionListener {
     
     public void displayMessage(String message){
         int answer = JOptionPane.showConfirmDialog(null, message + "!\nPlay again?", "Results", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-	if(answer == JOptionPane.YES_OPTION)controller.newGame(); else System.exit(0);
+	if(answer == JOptionPane.YES_OPTION)broker.newGame(); else System.exit(0);
     }
     
     public void showWinningRow(int[] row) {
@@ -80,6 +80,6 @@ public class Board extends JFrame implements ActionListener {
         JButton pressed = (JButton) e.getSource();
         String buttonName = pressed.getName();
 
-        controller.notifyButtonPressed(buttonName);
+        broker.notifyButtonPressed(buttonName);
     }
 }
